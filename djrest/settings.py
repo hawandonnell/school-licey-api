@@ -42,15 +42,18 @@ INSTALLED_APPS = [
     'djapp'
 ]
 
+
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAdminUser',
     ],
+    'DEFAULT_PARSER_CLASSES': [ 'rest_framework.parsers.JSONParser' ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication'
+        'rest_framework_simplejwt.authentication.JWTAuthentication'
     ]
+    'DEFAULT_RENDERER_CLASSES': [ 'rest_framework.renderers.JSONRenderer' ]
 }
 
 
@@ -90,8 +93,10 @@ WSGI_APPLICATION = 'djrest.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mydb',
+        'USER': 'postgres',
+        'PASSWORD': '2395601'
     }
 }
 
